@@ -5,13 +5,6 @@ import os
 
 pygame.init()
 
-#screen
-screen = pygame.display.set_mode((800, 608))
-
-#title and icon
-pygame.display.set_caption("SnakeGame")
-icon =pygame.image.load("snake1.png")
-pygame.display.set_icon(icon)
 
 jugadores = {}
 cabezaX_cambio = 0
@@ -55,7 +48,7 @@ def main(nombre):
 
     servidor = Cliente()
     id_actual = servidor.conectar(nombre)
-    jugadores, appleX, appleY = servidor.send("get")
+    jugadores, appleX, appleY = servidor.enviar("get")
 
     movA = True
     movD = True
@@ -138,8 +131,16 @@ while True:
     if 0 < len(nombre) < 20:
         break
     else:
-        print("Error, this name is not allowed (must be between 1 and 19 characters [inclusive])")
+        print("No se puede este nombre, debe ser de un rango entre 0 y 20")
 
+
+#screen
+screen = pygame.display.set_mode((800, 608))
+
+#title and icon
+pygame.display.set_caption("SnakeGame")
+icon =pygame.image.load("snake1.png")
+pygame.display.set_icon(icon)
 
 # start game
 main(nombre)
