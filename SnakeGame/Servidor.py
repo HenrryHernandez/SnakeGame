@@ -183,16 +183,14 @@ print("[SERVER] Esperando conexiones...")
 while True:
 
     host, addr = S.accept()
-    print("[CONNECTION] Connected to:", addr)
+    print("[CONEXION] Conectado con:", addr)
 
     # start game when a client on the server computer connects
     if addr[0] == IP_SERVIDOR and not (iniciar):
         iniciar = True
-        print("[STARTED] Game Started")
+        print("[JUEGO] El juego ha comenzado")
 
     # increment connections start new thread then increment ids
     conexiones += 1
     start_new_thread(iniciarHiloNuevo, (host, _id))
     _id += 1
-
-print("[SERVIDOR] Servidor fuera de servico")
