@@ -84,7 +84,7 @@ def comio(jugadores):
                 y = random32Y()
                 enCuerpo = False
                 for i in range(j["numDots"]):
-                    if j["bolitaX"][i] == x and j["bolitaY"][j] == y:
+                    if j["bolitaX"][i] == x and j["bolitaY"][i] == y:
                         enCuerpo = True
                         break
 
@@ -126,16 +126,12 @@ def iniciarHiloNuevo(conn, _id):
     while True:
         try:
             datos = conn.recv(32)
-            print(datos)
             if not datos:
-                print("no datos")
                 break
 
             datos = datos.decode("utf-8")
-            print(datos)
 
             if datos.split(" ")[0] == "move":
-                #print("MOVING")
                 split_data = datos.split(" ")
                 x = int(split_data[1])
                 y = int(split_data[2])
@@ -144,7 +140,7 @@ def iniciarHiloNuevo(conn, _id):
                 jugadores[id_actual]["cabezaX"] = x
                 jugadores[id_actual]["cabezaY"] = y
 
-                # only check for collison if the game has started
+                #checar colisiones y ese rollo
                 if iniciar:
                     comio(jugadores)
                     colision(jugadores)
@@ -160,26 +156,23 @@ def iniciarHiloNuevo(conn, _id):
                 send_data = pickle.dumps((jugadores, appleX, appleY))
 
             else:
-                #print("ELSE")
-                # any other command just send back list of players
                 send_data = pickle.dumps((jugadores, appleX, appleY))
 
-            # send data back to clients
-            print(len(send_data))
+            # info retorna a clientes
             conn.send(send_data)
 
         except Exception as e2:
             print("e2: ", e2)
-            break  # if an exception has been reached disconnect client
+            break  # desconectar al cliente en caso de errores
 
         time.sleep(0.001)
 
-    # When user disconnects
+    # info de desconecte
     print("[DISCONNECT] Name:", nombre, ", Client Id:", id_actual, "disconnected")
 
     conexiones -= 1
-    del jugadores[id_actual]  # remove client information from players list
-    conn.close()  # close connection
+    del jugadores[id_actual]  # bye bye cliente
+    conn.close()  # bye bye conexion
 
 
 print("[GAME] Cargando...")
