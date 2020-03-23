@@ -18,20 +18,11 @@ class Cliente:
     def desconectar(self):
         self.cliente.close()
 
-    def enviar(self, datos, pick=False):
+    def enviar(self, datos):
         try:
-            if pick:
-                self.cliente.send(pickle.dumps(datos))
-            else:
-                self.cliente.send(str.encode(datos))
-
-            respuesta = self.cliente.recv(2048 * 4)
-            try:
-                respuesta = pickle.loads(respuesta)
-            except Exception as e2:
-                print(e2)
+            self.cliente.send(str.encode(datos))
+            respuesta = pickle.loads(self.cliente.recv(2048 * 4))
 
             return respuesta
-
         except socket.error as e:
             print(e)
