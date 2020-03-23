@@ -126,12 +126,16 @@ def iniciarHiloNuevo(conn, _id):
     bolitaY = []
     numDots = 0
     gameOver = False
+    cabezaX_temp = 0
+    cabezaY_temp = 0
     #x, y = get_start_location(jugadores)
     x = 96
     y = 96
 
     jugadores[id_actual] = {"cabezaX": x,
                             "cabezaY": y,
+                            "cabezaX_temp": cabezaX_temp,
+                            "cabezaY_temp": cabezaY_temp,
                             "score": 0,
                             "nombre": nombre,
                             "numDots": numDots,
@@ -153,8 +157,12 @@ def iniciarHiloNuevo(conn, _id):
                 split_data = datos.split(" ")
                 x = int(split_data[1])
                 y = int(split_data[2])
+                xTemp = int(split_data[3])
+                yTemp = int(split_data[4])
                 jugadores[id_actual]["cabezaX"] = x
                 jugadores[id_actual]["cabezaY"] = y
+                jugadores[id_actual]["cabezaX_temp"] = xTemp
+                jugadores[id_actual]["cabezaY_temp"] = yTemp
 
                 # only check for collison if the game has started
                 if iniciar:
