@@ -145,16 +145,16 @@ def main(nombre):
         datos = "move " + str(jugador["cabezaX"]) + " " + str(jugador["cabezaY"]) + " " + str(cabezaX_temp) + " " \
                 + str(cabezaY_temp)
 
-        # send data to server and recieve back all players information
+        #enviamos info y recibiremos info tambien
         jugadores, appleX, appleY = servidor.enviar(datos)
 
+        #a continuacion los metodos nos ayudaran a repintar todo y se actualizara la pantalla despues
         gameOver(jugadores, id_actual)
         cabeza(jugadores)
         bolitaPintar()
         pintarManzana(appleX, appleY)
         mostrarMarcador(jugador["score"])
 
-        # redraw window then update the frame
         pygame.display.update()
 
     servidor.desconectar()
@@ -170,14 +170,14 @@ while True:
         print("No se puede este nombre, debe ser de un rango entre 0 y 20")
 
 
-#screen
+#pantalla
 screen = pygame.display.set_mode((800, 608))
 
-#title and icon
+#titulo e icono
 pygame.display.set_caption("SnakeGame")
 icon =pygame.image.load("snake1.png")
 pygame.display.set_icon(icon)
 
-# start game
+#arrancar
 main(nombre)
 
