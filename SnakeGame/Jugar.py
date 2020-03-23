@@ -24,7 +24,8 @@ def cabeza(jugadores):
 bolitaImg = pygame.image.load("dot.png")
 
 
-def bolitaPintar(jugadores):
+def bolitaPintar():
+    global jugadores
     for jugador in jugadores:
         j = jugadores[jugador]
         cabezaX_temp = j["cabezaX_temp"]
@@ -126,7 +127,7 @@ def main(nombre):
         jugadores, appleX, appleY = servidor.enviar(datos)
 
         cabeza(jugadores)
-        bolitaPintar(jugadores)
+        bolitaPintar()
         pintarManzana(appleX, appleY)
 
         # redraw window then update the frame
