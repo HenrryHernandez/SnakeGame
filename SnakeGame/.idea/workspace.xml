@@ -43,7 +43,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Servidor">
+  <component name="RunManager" selected="Python.Jugar">
     <configuration name="Jugar" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SnakeGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -130,8 +130,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Servidor" />
         <item itemvalue="Python.Jugar" />
+        <item itemvalue="Python.Servidor" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.cliente" />
       </list>
