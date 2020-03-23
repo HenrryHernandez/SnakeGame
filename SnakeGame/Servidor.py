@@ -58,7 +58,7 @@ def colision(jugadores):
         for i in range(j["numDots"]):
             if j["bolitaX"][i] == j["cabezaX"] and j["bolitaY"][i] == j["cabezaY"]:
                 j["gameOver"] = True
-                print(f"[GAME] " + j["nombre"] + " ya valio ")
+                print(j["nombre"] + " ya valio ")
 
 
 def comerManzana(cabX, cabY, appX, appY):
