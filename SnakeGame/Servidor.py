@@ -18,12 +18,12 @@ try:
     S.bind((IP_SERVIDOR, PUERTO))
 except socket.error as e:
     print(str(e))
-    print("[SERVIDOR] No se pudo iniciar")
+    print("No se pudo iniciar el servidor")
     quit()
 
 S.listen()
 
-print(f"[SERVER] Servidor iniciado con dirección: {IP_SERVIDOR}")
+print(f"Servidor iniciado con dirección: {IP_SERVIDOR}")
 
 #variables que se usaran a lo largo del juego
 jugadores = {}
@@ -167,7 +167,7 @@ def iniciarHiloNuevo(conn, _id):
         time.sleep(0.001)
 
     # info de desconecte
-    print("[DISCONNECT] Name:", nombre, ", Client Id:", id_actual, "disconnected")
+    print(nombre, "se ha desconectado")
 
     conexiones -= 1
     del jugadores[id_actual]  # bye bye cliente
