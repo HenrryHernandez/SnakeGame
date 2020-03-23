@@ -5,7 +5,6 @@ import os
 
 pygame.init()
 
-
 jugadores = {}
 cabezaX_cambio = 0
 cabezaY_cambio = 0
@@ -14,8 +13,6 @@ appleY = 0
 
 #cabeza
 cabezaImg = pygame.image.load("cabeza.png")
-cabezaX_cambio = 0
-cabezaY_cambio = 0
 
 
 def cabeza(jugadores):
@@ -31,6 +28,7 @@ def bolitaPintar(jugadores):
     for jugador in jugadores:
         j = jugadores[jugador]
         for i in range(j["numDots"]):
+            print("dots = ", j["numDots"], (j["bolitaX"], j["bolitaY"]))
             screen.blit(bolitaImg, (j["bolitaX"][i], j["bolitaY"][i]))
 
 
@@ -54,8 +52,8 @@ def main(nombre):
     movD = True
     movW = True
     movS = True
-    run = True
-    while run:
+    running = True
+    while running:
         jugador = jugadores[id_actual]
         datos = ""
 
@@ -94,6 +92,18 @@ def main(nombre):
                     movW = True
                     movS = True
 
+
+        # checamos los limites de nuestra cabeza
+        if jugador["cabezaX"] < 0:
+            jugador["cabezaX"] = 768
+        elif jugador["cabezaX"] == 800:
+            jugador["cabezaX"] = 0
+        elif jugador["cabezaY"] < 0:
+            jugador["cabezaY"] = 576
+        elif jugador["cabezaY"] == 608:
+            jugador["cabezaY"] = 0
+
+
         # cuerpo movimiento
         cabezaX_temp = jugador["cabezaX"]
         cabezaY_temp = jugador["cabezaY"]
@@ -109,11 +119,14 @@ def main(nombre):
             jugador["bolitaX"][i] = jugador["bolitaX"][i - 1]
             jugador["bolitaY"][i] = jugador["bolitaY"][i - 1]
 
+        print(jugador["bolitaX"], jugador["bolitaY"])
+        #empaquetamos info
         datos = "move " + str(jugador["cabezaX"]) + " " + str(jugador["cabezaY"])
 
         # send data to server and recieve back all players information
         jugadores, appleX, appleY = servidor.enviar(datos)
 
+        print(jugador["bolitaX"], jugador["bolitaY"])
         cabeza(jugadores)
         bolitaPintar(jugadores)
         pintarManzana(appleX, appleY)
