@@ -53,22 +53,6 @@ appleX = random32X()
 appleY = random32Y()
 
 
-"""def get_start_location(jugadores):
-    while True:
-        stop = True
-        x = random32X()
-        y = random32Y()
-        for jugador in jugadores:
-            j = jugadores[jugador]
-            if x == j["cabezaX"] and y == j["cabezaY"]:
-                stop = False
-                break
-        if stop:
-            break
-
-    return (x, y)"""
-
-
 def colision(jugadores):
     for jugador in jugadores:
         j = jugadores[jugador]
@@ -126,16 +110,11 @@ def iniciarHiloNuevo(conn, _id):
     bolitaY = []
     numDots = 0
     gameOver = False
-    cabezaX_temp = 0
-    cabezaY_temp = 0
-    #x, y = get_start_location(jugadores)
     x = 96
     y = 96
 
     jugadores[id_actual] = {"cabezaX": x,
                             "cabezaY": y,
-                            "cabezaX_temp": cabezaX_temp,
-                            "cabezaY_temp": cabezaY_temp,
                             "score": 0,
                             "nombre": nombre,
                             "numDots": numDots,
@@ -147,13 +126,16 @@ def iniciarHiloNuevo(conn, _id):
     while True:
         try:
             datos = conn.recv(32)
+            print(datos)
             if not datos:
+                print("no datos")
                 break
 
             datos = datos.decode("utf-8")
+            print(datos)
 
             if datos.split(" ")[0] == "move":
-                print("MOVING")
+                #print("MOVING")
                 split_data = datos.split(" ")
                 x = int(split_data[1])
                 y = int(split_data[2])
@@ -161,33 +143,33 @@ def iniciarHiloNuevo(conn, _id):
                 yTemp = int(split_data[4])
                 jugadores[id_actual]["cabezaX"] = x
                 jugadores[id_actual]["cabezaY"] = y
-                jugadores[id_actual]["cabezaX_temp"] = xTemp
-                jugadores[id_actual]["cabezaY_temp"] = yTemp
 
                 # only check for collison if the game has started
                 if iniciar:
                     comio(jugadores)
                     colision(jugadores)
 
+                for i in range(jugadores[id_actual]["numDots"] - 1, -1, -1):
+                    if i == 0:
+                        jugadores[id_actual]["bolitaX"][i] = xTemp
+                        jugadores[id_actual]["bolitaY"][i] = yTemp
+                        continue
+                    jugadores[id_actual]["bolitaX"][i] = jugadores[id_actual]["bolitaX"][i - 1]
+                    jugadores[id_actual]["bolitaY"][i] = jugadores[id_actual]["bolitaY"][i - 1]
+
                 send_data = pickle.dumps((jugadores, appleX, appleY))
 
-            elif datos.split(" ")[0] == "id":
-                print("ID")
-                send_data = str.encode(str(id_actual))  # if user requests id then send it
-
-            elif datos.split(" ")[0] == "jump":
-                print("JUMP")
-                send_data = pickle.dumps((jugadores, appleX, appleY))
             else:
-                print("ELSE")
+                #print("ELSE")
                 # any other command just send back list of players
                 send_data = pickle.dumps((jugadores, appleX, appleY))
 
             # send data back to clients
+            print(len(send_data))
             conn.send(send_data)
 
         except Exception as e2:
-            print(e2)
+            print("e2: ", e2)
             break  # if an exception has been reached disconnect client
 
         time.sleep(0.001)
