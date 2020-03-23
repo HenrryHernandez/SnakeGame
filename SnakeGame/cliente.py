@@ -32,5 +32,6 @@ class Cliente:
                 print(e2)
 
             return respuesta
+
         except socket.error as e:
             print(e)
