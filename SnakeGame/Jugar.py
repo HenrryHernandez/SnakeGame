@@ -28,15 +28,6 @@ def bolitaPintar():
     global jugadores
     for jugador in jugadores:
         j = jugadores[jugador]
-        cabezaX_temp = j["cabezaX_temp"]
-        cabezaY_temp = j["cabezaY_temp"]
-        for i in range(j["numDots"] - 1, -1, -1):
-            if i == 0:
-                j["bolitaX"][i] = cabezaX_temp
-                j["bolitaY"][i] = cabezaY_temp
-                continue
-            j["bolitaX"][i] = j["bolitaX"][i - 1]
-            j["bolitaY"][i] = j["bolitaY"][i - 1]
         for i in range(j["numDots"]):
             screen.blit(bolitaImg, (j["bolitaX"][i], j["bolitaY"][i]))
 
@@ -64,7 +55,6 @@ def main(nombre):
     running = True
     while running:
         jugador = jugadores[id_actual]
-        datos = ""
 
         time.sleep(.07)
         screen.fill((220, 220, 220))
@@ -104,24 +94,25 @@ def main(nombre):
 
         # checamos los limites de nuestra cabeza
         if jugador["cabezaX"] < 0:
-            jugador["cabezaX"] = 768
+            jugador["cabezaX"] = 800
         elif jugador["cabezaX"] == 800:
-            jugador["cabezaX"] = 0
+            jugador["cabezaX"] = -32
         elif jugador["cabezaY"] < 0:
-            jugador["cabezaY"] = 576
+            jugador["cabezaY"] = 608
         elif jugador["cabezaY"] == 608:
-            jugador["cabezaY"] = 0
+            jugador["cabezaY"] = -32
 
 
         # cuerpo movimiento
-        jugador["cabezaX_temp"] = jugador["cabezaX"]
-        jugador["cabezaY_temp"] = jugador["cabezaY"]
+        cabezaX_temp = jugador["cabezaX"]
+        cabezaY_temp = jugador["cabezaY"]
 
         jugador["cabezaX"] += cabezaX_cambio
         jugador["cabezaY"] += cabezaY_cambio
 
         #empaquetamos info
-        datos = "move " + str(jugador["cabezaX"]) + " " + str(jugador["cabezaY"]) + " " + str(jugador["cabezaX_temp"]) + " " + str(jugador["cabezaY_temp"])
+        datos = "move " + str(jugador["cabezaX"]) + " " + str(jugador["cabezaY"]) + " " + str(cabezaX_temp) + " " \
+                + str(cabezaY_temp)
 
         # send data to server and recieve back all players information
         jugadores, appleX, appleY = servidor.enviar(datos)
