@@ -4,6 +4,8 @@
     <list default="true" id="a137bd3e-7ac1-4b69-88de-24f627bf6ff5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Jugar.py" beforeDir="false" afterPath="$PROJECT_DIR$/Jugar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Servidor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Servidor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/cliente.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,8 +134,8 @@
       <list>
         <item itemvalue="Python.Jugar" />
         <item itemvalue="Python.Servidor" />
-        <item itemvalue="Python.cliente" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.cliente" />
       </list>
     </recent_temporary>
   </component>
@@ -155,7 +157,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
