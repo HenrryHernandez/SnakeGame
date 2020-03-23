@@ -53,7 +53,7 @@ appleX = random32X()
 appleY = random32Y()
 
 
-def get_start_location(jugadores):
+"""def get_start_location(jugadores):
     while True:
         stop = True
         x = random32X()
@@ -66,7 +66,7 @@ def get_start_location(jugadores):
         if stop:
             break
 
-    return (x, y)
+    return (x, y)"""
 
 
 def colision(jugadores):
@@ -104,12 +104,12 @@ def comio(jugadores):
                         enCuerpo = True
                         break
 
-        appleX = x
-        appleY = y
-        j["score"] += 1
-        j["numDots"] += 1
-        j["bolitaX"].append(0)
-        j["bolitaY"].append(0)
+            appleX = x
+            appleY = y
+            j["score"] += 1
+            j["numDots"] += 1
+            j["bolitaX"].append(0)
+            j["bolitaY"].append(0)
 
 
 def iniciarHiloNuevo(conn, _id):
@@ -126,10 +126,10 @@ def iniciarHiloNuevo(conn, _id):
     bolitaY = []
     numDots = 0
     gameOver = False
-
     #x, y = get_start_location(jugadores)
     x = 96
     y = 96
+
     jugadores[id_actual] = {"cabezaX": x,
                             "cabezaY": y,
                             "score": 0,
@@ -140,38 +140,38 @@ def iniciarHiloNuevo(conn, _id):
                             "gameOver": gameOver}
 
     conn.send(str.encode(str(id_actual)))
-
     while True:
         try:
             datos = conn.recv(32)
-
             if not datos:
                 break
 
             datos = datos.decode("utf-8")
 
             if datos.split(" ")[0] == "move":
+                print("MOVING")
                 split_data = datos.split(" ")
                 x = int(split_data[1])
                 y = int(split_data[2])
-                jugadores[id_actual]["x"] = x
-                jugadores[id_actual]["y"] = y
+                jugadores[id_actual]["cabezaX"] = x
+                jugadores[id_actual]["cabezaY"] = y
 
                 # only check for collison if the game has started
                 if iniciar:
                     comio(jugadores)
                     colision(jugadores)
 
-                # if the amount of balls is less than 150 create more
-
                 send_data = pickle.dumps((jugadores, appleX, appleY))
 
             elif datos.split(" ")[0] == "id":
+                print("ID")
                 send_data = str.encode(str(id_actual))  # if user requests id then send it
 
             elif datos.split(" ")[0] == "jump":
+                print("JUMP")
                 send_data = pickle.dumps((jugadores, appleX, appleY))
             else:
+                print("ELSE")
                 # any other command just send back list of players
                 send_data = pickle.dumps((jugadores, appleX, appleY))
 
@@ -184,12 +184,12 @@ def iniciarHiloNuevo(conn, _id):
 
         time.sleep(0.001)
 
-        # When user disconnects
-        print("[DISCONNECT] Name:", nombre, ", Client Id:", id_actual, "disconnected")
+    # When user disconnects
+    print("[DISCONNECT] Name:", nombre, ", Client Id:", id_actual, "disconnected")
 
-        conexiones -= 1
-        del jugadores[id_actual]  # remove client information from players list
-        conn.close()  # close connection
+    conexiones -= 1
+    del jugadores[id_actual]  # remove client information from players list
+    conn.close()  # close connection
 
 
 print("[GAME] Cargando...")
