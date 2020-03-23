@@ -8,12 +8,12 @@ import time
 S = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 S.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-#IPS Y ESE PEDO
+#IPs y ese rollo
 PUERTO = 5555
 NOMBRE_HOST = socket.gethostname()
 IP_SERVIDOR = socket.gethostbyname(NOMBRE_HOST)
 
-#INTENTAR CONECTAR AL SERVIDOR
+#intentar conexion con el server
 try:
     S.bind((IP_SERVIDOR, PUERTO))
 except socket.error as e:
@@ -25,14 +25,13 @@ S.listen()
 
 print(f"[SERVER] Servidor iniciado con dirección: {IP_SERVIDOR}")
 
-#variables
+#variables que se usaran a lo largo del juego
 jugadores = {}
 conexiones = 0
 _id = 0
 iniciar = False
 
 
-#COSAS DEL JUEGO
 def random32X():
     x = random.randint(0, 768)
     while x % 32 != 0:
@@ -101,10 +100,10 @@ def iniciarHiloNuevo(conn, _id):
 
     id_actual = _id
 
-    # RECIBIR NOMBRE DEL CLIENTE
+    #recibiremos el nombre del cliente
     datos = conn.recv(16)
     nombre = datos.decode("utf-8")
-    print("[LOG]", nombre, "conectado al servidor.")
+    print(nombre, "se ha conectado.")
 
     bolitaX = []
     bolitaY = []
@@ -175,20 +174,20 @@ def iniciarHiloNuevo(conn, _id):
     conn.close()  # bye bye conexion
 
 
-print("[GAME] Cargando...")
-print("[SERVER] Esperando conexiones...")
+print("Cargando...")
+print("Esperando conexiones...")
 
 
 #LOOP ENCARGADO DE ACEPTAR NUEVAS CONEXIONES
 while True:
 
     host, addr = S.accept()
-    print("[CONEXION] Conectado con:", addr)
+    print("Conectado con:", addr)
 
     # start game when a client on the server computer connects
     if addr[0] == IP_SERVIDOR and not (iniciar):
         iniciar = True
-        print("[JUEGO] El juego ha comenzado")
+        print("El juego ha comenzado")
 
     # increment connections start new thread then increment ids
     conexiones += 1
