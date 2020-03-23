@@ -4,7 +4,6 @@
     <list default="true" id="a137bd3e-7ac1-4b69-88de-24f627bf6ff5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Jugar.py" beforeDir="false" afterPath="$PROJECT_DIR$/Jugar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Servidor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Servidor.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +27,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/agario/Agar-IO-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -44,7 +43,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Jugar">
+  <component name="RunManager" selected="Python.Servidor">
     <configuration name="Jugar" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SnakeGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -131,10 +130,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Jugar" />
         <item itemvalue="Python.Servidor" />
-        <item itemvalue="Python.cliente" />
+        <item itemvalue="Python.Jugar" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.cliente" />
       </list>
     </recent_temporary>
   </component>
