@@ -175,13 +175,13 @@ while running:
 
     #checamos los limites de nuestra cabeza
     if cabezaX < 0:
-        cabezaX = 768
+        cabezaX = 800
     elif cabezaX == 800:
-        cabezaX = 0
+        cabezaX = -32
     elif cabezaY < 0:
-        cabezaY = 576
+        cabezaY = 608
     elif cabezaY == 608:
-        cabezaY = 0
+        cabezaY = -32
 
     #checar si se comio la manzana y que al generar manzana no choque con alguna parte del cuerpo
     comido = comerManzana(cabezaX, cabezaY, appleX, appleY)
