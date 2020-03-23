@@ -10,6 +10,10 @@ cabezaX_cambio = 0
 cabezaY_cambio = 0
 appleX = 0
 appleY = 0
+movA = True
+movD = True
+movW = True
+movS = True
 
 #cabeza
 cabezaImg = pygame.image.load("cabeza.png")
@@ -39,8 +43,38 @@ def pintarManzana(x, y):
     screen.blit(appleImg, (x, y))
 
 
+#game over mensaje
+gameOverTablero = pygame.font.Font('freesansbold.ttf', 100)
+
+
+def mostrarGameOver():
+    gameOverMensaje = gameOverTablero.render("Game Over", True, (255, 0, 0))
+    screen.blit(gameOverMensaje, (125, 200))
+
+
+def gameOver(jugadores, id):
+    global movA, movD, movW, movS, cabezaX_cambio, cabezaY_cambio
+    if jugadores[id]["gameOver"]:
+        cabezaX_cambio = 0
+        cabezaY_cambio = 0
+        movW = False
+        movD = False
+        movS = False
+        movA = False
+        mostrarGameOver()
+
+
+#marcador texto
+scoreTablero = pygame.font.Font('freesansbold.ttf', 25)
+
+
+def mostrarMarcador(puntaje):
+    scoreMensaje = scoreTablero.render("Puntos: " + str(puntaje), True, (0, 0, 0))
+    screen.blit(scoreMensaje, (10, 10))
+
+
 def main(nombre):
-    global jugadores, cabezaX_cambio, cabezaY_cambio, appleX, appleY
+    global jugadores, cabezaX_cambio, cabezaY_cambio, appleX, appleY, movA, movD, movW, movS
 
     # start by connecting to the network
 
@@ -48,10 +82,7 @@ def main(nombre):
     id_actual = servidor.conectar(nombre)
     jugadores, appleX, appleY = servidor.enviar("get")
 
-    movA = True
-    movD = True
-    movW = True
-    movS = True
+
     running = True
     while running:
         jugador = jugadores[id_actual]
@@ -117,9 +148,11 @@ def main(nombre):
         # send data to server and recieve back all players information
         jugadores, appleX, appleY = servidor.enviar(datos)
 
+        gameOver(jugadores, id_actual)
         cabeza(jugadores)
         bolitaPintar()
         pintarManzana(appleX, appleY)
+        mostrarMarcador(jugador["score"])
 
         # redraw window then update the frame
         pygame.display.update()
