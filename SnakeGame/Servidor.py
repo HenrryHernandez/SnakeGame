@@ -30,20 +30,22 @@ jugadores = {}
 conexiones = 0
 _id = 0
 iniciar = False
+rangoManzanaX = 640 #768 default
+rangoManzanaY = 448 #576 default
 
 
 def random32X():
-    x = random.randint(0, 768)
+    x = random.randint(0, rangoManzanaX)
     while x % 32 != 0:
-        x = random.randint(0, 768)
+        x = random.randint(0, rangoManzanaX)
 
     return x
 
 
 def random32Y():
-    y = random.randint(0, 576)
+    y = random.randint(0, rangoManzanaY)
     while y % 32 != 0:
-        y = random.randint(0, 576)
+        y = random.randint(0, rangoManzanaY)
 
     return y
 
@@ -77,6 +79,8 @@ def comio(jugadores):
 
         comido = comerManzana(j["cabezaX"], j["cabezaY"], appleX, appleY)
         if comido:
+            x = random32X()
+            y = random32Y()
             enCuerpo = True
             while enCuerpo:
                 x = random32X()
