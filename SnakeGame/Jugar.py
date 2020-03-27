@@ -14,9 +14,11 @@ movA = True
 movD = True
 movW = True
 movS = True
+screenX = 672 #800 default
+screenY = 480 #608 default
 
 #cabeza
-cabezaImg = pygame.image.load("cabeza.png")
+cabezaImg = pygame.image.load("imagenes/cabeza.png")
 
 
 def cabeza(jugadores):
@@ -25,7 +27,7 @@ def cabeza(jugadores):
         screen.blit(cabezaImg, (j["cabezaX"], j["cabezaY"]))
 
 
-bolitaImg = pygame.image.load("dot.png")
+bolitaImg = pygame.image.load("imagenes/dot.png")
 
 
 def bolitaPintar():
@@ -36,7 +38,7 @@ def bolitaPintar():
             screen.blit(bolitaImg, (j["bolitaX"][i], j["bolitaY"][i]))
 
 
-appleImg = pygame.image.load("apple.png")
+appleImg = pygame.image.load("imagenes/apple.png")
 
 
 def pintarManzana(x, y):
@@ -44,7 +46,7 @@ def pintarManzana(x, y):
 
 
 #game over mensaje
-gameOverTablero = pygame.font.Font('freesansbold.ttf', 100)
+gameOverTablero = pygame.font.Font('freesansbold.ttf', 70) #100 con default sizes
 
 
 def mostrarGameOver():
@@ -74,7 +76,7 @@ def mostrarMarcador(puntaje):
 
 
 def main(nombre):
-    global jugadores, cabezaX_cambio, cabezaY_cambio, appleX, appleY, movA, movD, movW, movS
+    global jugadores, cabezaX_cambio, cabezaY_cambio, appleX, appleY, movA, movD, movW, movS, screenX, screenY
 
     # start by connecting to the network
 
@@ -125,12 +127,12 @@ def main(nombre):
 
         # checamos los limites de nuestra cabeza
         if jugador["cabezaX"] < 0:
-            jugador["cabezaX"] = 800
-        elif jugador["cabezaX"] == 800:
+            jugador["cabezaX"] = screenX
+        elif jugador["cabezaX"] == screenX:
             jugador["cabezaX"] = -32
         elif jugador["cabezaY"] < 0:
-            jugador["cabezaY"] = 608
-        elif jugador["cabezaY"] == 608:
+            jugador["cabezaY"] = screenY
+        elif jugador["cabezaY"] == screenY:
             jugador["cabezaY"] = -32
 
 
@@ -171,11 +173,11 @@ while True:
 
 
 #pantalla
-screen = pygame.display.set_mode((800, 608))
+screen = pygame.display.set_mode((screenX, screenY))
 
 #titulo e icono
 pygame.display.set_caption("SnakeGame")
-icon =pygame.image.load("snake1.png")
+icon =pygame.image.load("imagenes/snake1.png")
 pygame.display.set_icon(icon)
 
 #arrancar
