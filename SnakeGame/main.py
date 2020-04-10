@@ -93,8 +93,9 @@ numDots = 0
 
 
 def bolita():
-    global numDots
+    global numDots, puntaje
     numDots += 1
+    puntaje = numDots
     bolitaImgs.append(bolitaImg)
     bolitaX.append(0)
     bolitaY.append(0)
@@ -198,20 +199,31 @@ while running:
 
         appleX = x
         appleY = y
-        puntaje += 1
         bolita()
 
-    #checar Game Over
+    #checar Game Over, o sea, collision de la serpiente consigo misma
+    #NOTA: aqui tenemos dos opciones:
+        #1.- que la serpiente al chocar consigo misma casuse un game over
+        #2.- que al chocar consigo misma se parta en donde choque y por lo tanto pierda puntos, pero evitando un game over
+    #para dejar la opcion 1 tenemos que descomentar las lineas de codigo que dicen opcion 1 en sus comentarios y comentar
+        #las que dicen opcion 2; para dejar la opcion 2, hacer lo contrario
     for i in range(numDots):
         if bolitaX[i] == cabezaX and bolitaY[i] == cabezaY:
-            cabezaX_cambio = 0
-            cabezaY_cambio = 0
-            movW = False
-            movD = False
-            movS = False
-            movA = False
-            mostrarGameOver()
-            reiniciar = True
+            cabezaX_cambio = 0 #opcion 1
+            cabezaY_cambio = 0 #opcion 1
+            movW = False #opcion 1
+            movD = False #opcion 1
+            movS = False #opcion 1
+            movA = False #opcion 1
+            mostrarGameOver() #opcion 1
+            reiniciar = True #opcion 1
+            break #opcion 1
+
+            """numDots = i #opcion 2
+            puntaje = numDots #opcion 2
+            break #opcion 2
+            """
+
 
 
     #cuerpo movimiento
