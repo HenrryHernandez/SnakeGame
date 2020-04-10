@@ -9,8 +9,8 @@ pygame.init()
 screen = pygame.display.set_mode((800, 608))
 
 #title and icon
-pygame.display.set_caption("SnakeGame")
-icon =pygame.image.load("snake1.png")
+pygame.display.set_caption("imagenes/SnakeGame")
+icon =pygame.image.load("imagenes/snake1.png")
 pygame.display.set_icon(icon)
 
 #marcador texto
@@ -36,7 +36,7 @@ def mostrarGameOver():
 
 
 #cabeza
-cabezaImg = pygame.image.load("cabeza.png")
+cabezaImg = pygame.image.load("imagenes/cabeza.png")
 cabezaX = 96
 cabezaY = 96
 cabezaX_cambio = 0
@@ -48,7 +48,7 @@ def cabeza(x, y):
 
 
 #cargar apple imagen
-appleImg = pygame.image.load("apple.png")
+appleImg = pygame.image.load("imagenes/apple.png")
 
 
 def random32X():
@@ -85,7 +85,7 @@ def comerManzana(cabX, cabY, appX, appY):
 
 
 #cuerpo
-bolitaImg = pygame.image.load("dot.png")
+bolitaImg = pygame.image.load("imagenes/dot.png")
 bolitaImgs = []
 bolitaX =[]
 bolitaY = []
